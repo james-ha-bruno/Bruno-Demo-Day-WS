@@ -1,0 +1,52 @@
+info:
+  name: cheerio - inbuilt library
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: https://example.com
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        // ✅ Safe parse pattern (HTML string)
+        const html = res.getBody();
+
+        // ✅ Explicitly import Cheerio from Bruno's inbuilt libraries
+        const cheerio = require("cheerio");
+
+        // Load the HTML
+        const $ = cheerio.load(html);
+
+        // Extract <title> and all <a> links
+        const title = $("title").text();
+        const links = [];
+        $("a").each((i, el) => {
+          const href = $(el).attr("href");
+          const text = $(el).text().trim();
+          if (href) links.push({ text, href });
+        });
+
+        console.log("✅ Page title:", title);
+        console.log("🔗 Found links:", links.length);
+
+        // Optional visualization
+        const columnDefinitions = [
+          { field: "text", flex: 2 },
+          { field: "href", flex: 3 }
+        ];
+
+        bru.visualize("table", {
+          name: "Extracted Links (Cheerio)",
+          provider: "ag-grid",
+          props: { rowData: links, columnDefinitions }
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

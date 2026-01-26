@@ -1,0 +1,74 @@
+info:
+  name: Create Employee
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: https://echo.usebruno.com
+  headers:
+    - name: ""
+      value: ""
+  params:
+    - name: scope
+      value: "{{scope}}"
+      type: query
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+        "Name": "{{nameVar}}",
+        "Company": "{{companyVar}}"
+      }
+  auth:
+    type: bearer
+    token: "{{global-script-token}}"
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        // let bodyName = "James PreScript";
+        // bru.setVar('nameVar',bodyName);
+
+        // const runtimeVars = bru.getVar('nameVar')
+        // if (runtimeVars) {
+        //   Object.keys(runtimeVars).forEach(key => {
+        //     bru.deleteVar(key);
+        //   });
+        // }
+
+        bru.deleteVar('nameVar');
+    - type: after-response
+      code: |-
+        // const scopeName = bru.getGlobalEnvVar('scope');
+        // console.log(`Scope used: ${scopeName}`)
+    - type: tests
+      code: |-
+        // test("Status code should be 200", () => {
+        //   expect(res.status).to.equal(200);
+        // });
+
+
+        // test("Response body should contain 'Name' property", () => {
+        //   const raw = res.getBody();
+        //   const json = typeof raw === "string" ? JSON.parse(raw) : raw;
+
+        //   expect(json).to.be.an("object");
+        //   expect(json).to.have.property("Name");
+        // });
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
+      disabled: true
+    - expression: res.body.Name
+      operator: isNotEmpty
+      disabled: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

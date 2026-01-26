@@ -1,0 +1,81 @@
+info:
+  name: Get Random Dog Fact
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: https://dogapi.dog/api/v2/facts
+  params:
+    - name: max_length
+      value: ""
+      type: query
+      disabled: true
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const responseUrl = res.getUrl();
+        console.log("Response URL:", responseUrl);
+    - type: tests
+      code: |-
+        const body = res.getBody();
+
+        test("Response should have correct structure", () => {
+          expect(res.getStatus()).to.equal(200);
+          expect(body).to.be.an("object");
+          expect(body).to.have.property("data");
+          expect(body.data).to.be.an("array");
+        });
+
+        test("Should return at least one dog fact", () => {
+          expect(body.data.length).to.be.greaterThan(0);
+        });
+
+        test("Each fact should have required properties", () => {
+          body.data.forEach((fact, index) => {
+            expect(fact, `Fact at index ${index}`).to.be.an("object");
+            expect(fact, `Fact at index ${index}`).to.have.property("id");
+            expect(fact, `Fact at index ${index}`).to.have.property("type");
+            expect(fact, `Fact at index ${index}`).to.have.property("attributes");
+
+            expect(fact.id, `Fact ID at index ${index}`).to.be.a("string");
+            expect(fact.type, `Fact type at index ${index}`).to.equal("fact");
+            expect(fact.attributes, `Fact attributes at index ${index}`).to.be.an("object");
+            expect(fact.attributes, `Fact attributes at index ${index}`).to.have.property("body");
+            expect(fact.attributes.body, `Fact body at index ${index}`).to.be.a("string");
+            expect(fact.attributes.body.length, `Fact body at index ${index}`).to.be.greaterThan(0);
+          });
+        });
+
+        test("Fact IDs should be valid UUIDs", () => {
+          const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+          body.data.forEach((fact, index) => {
+            expect(fact.id, `Fact ID at index ${index} should be a valid UUID`).to.match(uuidRegex);
+          });
+        });
+
+        test("Dog facts should contain meaningful content", () => {
+          body.data.forEach((fact, index) => {
+            const factBody = fact.attributes.body;
+            expect(factBody.length, `Fact at index ${index} should have substantial content`).to.be.at.least(10);
+            // Check that it's not just whitespace
+            expect(factBody.trim().length, `Fact at index ${index} should not be just whitespace`).to.be.greaterThan(0);
+          });
+        });
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
+    - expression: res.body
+      operator: isJson
+    - expression: res.body.data
+      operator: isArray
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
