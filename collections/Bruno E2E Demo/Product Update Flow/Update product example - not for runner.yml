@@ -2,8 +2,6 @@ info:
   name: Update product example - not for runner
   type: http
   seq: 5
-  tags:
-    - demo
 
 http:
   method: PUT

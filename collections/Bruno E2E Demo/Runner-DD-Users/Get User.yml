@@ -2,6 +2,8 @@ info:
   name: Get User
   type: http
   seq: 1
+  tags:
+    - test-only
 
 http:
   method: GET

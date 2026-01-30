@@ -2,6 +2,8 @@ info:
   name: Create Users
   type: http
   seq: 2
+  tags:
+    - test-only
 
 http:
   method: POST

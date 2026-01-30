@@ -1,7 +1,9 @@
 info:
   name: Get News Articles
   type: http
-  seq: 3
+  seq: 2
+  tags:
+    - demo
 
 http:
   method: GET

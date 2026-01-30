@@ -2,6 +2,8 @@ info:
   name: Get Random Dog Fact
   type: http
   seq: 1
+  tags:
+    - demo
 
 http:
   method: GET
@@ -79,3 +81,26 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |-
+  ## 🐶 Dog Facts API
+
+  The Dog Facts API is a tiny, public API that returns random, fun facts about dogs.
+  It’s perfect for demos, testing API clients, or anytime you need a harmless endpoint that returns real JSON data.
+
+  No auth. No setup. Just dogs.
+
+  ### 🎯 Why This API Is Great for Demos
+  	•	✅ Public & free
+  	•	✅ Fast responses
+  	•	✅ Simple GET request
+  	•	✅ Clean JSON output
+  	•	✅ Zero risk test data
+  	•	✅ Everyone likes dogs
+    
+  ### 🐕 Sample Dog Facts You Might Get
+  	•	Dogs can learn more than 100 words and gestures
+  	•	A dog’s nose print is as unique as a human fingerprint
+  	•	Dogs dream just like humans do
+  	•	Puppies are born deaf and blind
+  	•	Dogs have been human companions for over 15,000 years
