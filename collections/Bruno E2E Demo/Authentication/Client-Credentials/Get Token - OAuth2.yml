@@ -5,7 +5,11 @@ info:
 
 http:
   method: GET
-  url: https://www.httpfaker.org/api/auth/oauth2/client-credentials/resource
+  url: https://www.httpfaker.org/api/auth/oauth2/client-credentials/resource?access_token
+  params:
+    - name: access_token
+      value: ""
+      type: query
   auth:
     type: oauth2
     flow: client_credentials
@@ -18,7 +22,7 @@ http:
     tokenConfig:
       id: credentials
       placement:
-        header: Bearer
+        query: access_token
     settings:
       autoFetchToken: true
       autoRefreshToken: false
