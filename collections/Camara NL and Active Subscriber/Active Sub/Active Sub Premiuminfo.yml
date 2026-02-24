@@ -1,0 +1,37 @@
+info:
+  name: Active Sub Premiuminfo
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: https:///{{VF_SANDBOX_URL}}/vodafone/premiuminfo/v1
+  headers:
+    - name: vf-trace-transaction-id
+      value: prem_mc_di_GB_age_verify_{{trxid}}
+      disabled: true
+    - name: Authorization
+      value: "{{vault:bearer-token}}"
+    - name: User-ID-Type
+      value: MSISDN
+    - name: User-ID
+      value: "447772000002"
+    - name: Origin
+      value: https://developer.vodafone.com
+      disabled: true
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Valid access_token", () => {
+            var data = res.getBody();
+            console.log("access_token: "+ data.access_token);
+            bru.setVar("LAST_ACCESS_TOKEN", data.access_token);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

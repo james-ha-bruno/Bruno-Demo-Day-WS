@@ -1,0 +1,32 @@
+info:
+  name: Active sub token generation
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https:///{{VF_SANDBOX_URL}}/vodafone/v1/token
+  headers:
+    - name: Authorization
+      value: Basic {{AGEVERIFY_encrypted}}
+    - name: Content-Type
+      value: application/x-www-form-urlencoded
+    - name: Accept
+      value: application/json
+  body:
+    type: form-urlencoded
+    data:
+      - name: grant_type
+        value: client_credentials
+      - name: scope
+        value: mc_vf_active_sub
+  auth:
+    type: basic
+    username: "{{SANDBOX_CLIENT_KEY}}"
+    password: "{{SANDBOX_CLIENT_SECRET}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

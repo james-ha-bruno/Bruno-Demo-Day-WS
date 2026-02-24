@@ -1,0 +1,93 @@
+opencollection: 1.0.0
+
+info:
+  name: Camara NL and Active Subscriber
+
+request:
+  variables:
+    - name: AWS_PREPROD
+      value: api-test.non-prod.vf-dmp.engineering.vodafone.com
+    - name: trxid
+      value: ""
+    - name: AGEVERIFY_client_id
+      value: JSiNrSIoSxqxZXIQTXDvWc6J2YB6RcTSYGl47UD7hTBeux5T
+    - name: AGEVERIFY_secret
+      value: Aegj5o0Qn0M6peBXIHGwYUhnWIZwyjXZW4hdawHTOfQdcyqh2XKyXtlo1rV85Ljc
+    - name: AGEVERIFY_encrypted
+      value: ""
+    - name: AGEVERIFY_access_token
+      value: ""
+    - name: SCAM_client_id
+      value: ""
+    - name: SCAM_secret
+      value: ""
+    - name: SCAM_encrypted
+      value: ""
+    - name: SCAM_access_token
+      value: ""
+    - name: CFWD_client_id
+      value: JSiNrSIoSxqxZXIQTXDvWc6J2YB6RcTSYGl47UD7hTBeux5T
+    - name: CFWD_secret
+      value: Aegj5o0Qn0M6peBXIHGwYUhnWIZwyjXZW4hdawHTOfQdcyqh2XKyXtlo1rV85Ljc
+    - name: CFWD_encrypted
+      value: ""
+    - name: CFWD_access_token
+      value: ""
+    - name: KYC_client_id
+      value: JSiNrSIoSxqxZXIQTXDvWc6J2YB6RcTSYGl47UD7hTBeux5T
+    - name: KYC_secret
+      value: Aegj5o0Qn0M6peBXIHGwYUhnWIZwyjXZW4hdawHTOfQdcyqh2XKyXtlo1rV85Ljc
+    - name: KYC_encrypted
+      value: ""
+    - name: KYC_access_token
+      value: ""
+    - name: NR_client_id
+      value: JSiNrSIoSxqxZXIQTXDvWc6J2YB6RcTSYGl47UD7hTBeux5T
+    - name: NR_secret
+      value: Aegj5o0Qn0M6peBXIHGwYUhnWIZwyjXZW4hdawHTOfQdcyqh2XKyXtlo1rV85Ljc
+    - name: NR_encrypted
+      value: ""
+    - name: NR_access_token
+      value: ""
+    - name: SWAP_client_id
+      value: JSiNrSIoSxqxZXIQTXDvWc6J2YB6RcTSYGl47UD7hTBeux5T
+    - name: SWAP_secret
+      value: Aegj5o0Qn0M6peBXIHGwYUhnWIZwyjXZW4hdawHTOfQdcyqh2XKyXtlo1rV85Ljc
+    - name: SWAP_encrypted
+      value: ""
+    - name: SWAP_access_token
+      value: ""
+    - name: TEN_client_id
+      value: dSoMIwuDgpla4pe3xeIPBbGUO4qej5lL
+    - name: TEN_secret
+      value: ""
+    - name: TEN_encrypted
+      value: ""
+    - name: TEN_access_token
+      value: ""
+    - name: MVNO_client_id
+      value: ""
+    - name: MVNO_secret
+      value: ""
+    - name: MVNO_encrypted
+      value: ""
+    - name: MVNO_access_token
+      value: ""
+    - name: trx_prefix
+      value: dmp_test_pre
+    - name: LAST_TRACE_ID
+      value: ""
+    - name: LAST_AUTH_REQ_ID
+      value: ""
+    - name: LAST_ACCESS_TOKEN
+      value: ""
+
+docs:
+  content: This collection has been prepared to run Requests for most used Mobile Connect Services on Stagingref Environment and for GB market.
+  type: text/markdown
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git

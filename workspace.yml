@@ -6,6 +6,10 @@ info:
 collections:
   - name: "Bruno E2E Demo"
     path: "collections/Bruno E2E Demo"
+  - name: "Camara NL and Active Subscriber"
+    path: "collections/Camara NL and Active Subscriber"
+  - name: "GitHub REST API"
+    path: "collections/github-rest-api-collection"
 
 specs:
 

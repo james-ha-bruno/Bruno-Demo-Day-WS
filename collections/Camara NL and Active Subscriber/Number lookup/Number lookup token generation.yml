@@ -1,0 +1,45 @@
+info:
+  name: Number lookup token generation
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https:///{{VF_SANDBOX_URL}}/vodafone/v1/token
+  headers:
+    - name: Authorization
+      value: Basic {{AGEVERIFY_encrypted}}
+    - name: Content-Type
+      value: application/x-www-form-urlencoded
+    - name: Accept
+      value: application/json
+  body:
+    type: form-urlencoded
+    data:
+      - name: grant_type
+        value: client_credentials
+      - name: scope
+        value: mc_vf_number_lookup
+  auth:
+    type: basic
+    username: "{{SANDBOX_CLIENT_KEY}}"
+    password: "{{SANDBOX_CLIENT_SECRET}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test("Valid access_token", () => {
+            var data = req.getHeaders().get("X-Correlator")
+            console.log("X-Correlator: " + data);
+            bru.setVar("LAST_TRACE_ID", data);
+            var data = res.getBody();
+            console.log("authentication_request: "+ data.auth_req_id);
+            bru.setVar("LAST_AUTH_REQ_ID", data.auth_req_id);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
