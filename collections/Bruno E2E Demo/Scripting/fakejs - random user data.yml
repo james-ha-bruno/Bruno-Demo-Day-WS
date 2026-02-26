@@ -1,7 +1,7 @@
 info:
   name: fakejs - random user data
   type: http
-  seq: 5
+  seq: 4
 
 http:
   method: POST
@@ -12,7 +12,7 @@ http:
       {
         "Title": "{{$randomNamePrefix}}",
         "Name": "{{$randomFullName}}",
-        "Role": "{{$randomInt}}"
+        "Role": "{{$random}}"
       }
   auth: inherit
 

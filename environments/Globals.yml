@@ -1,0 +1,4 @@
+name: Globals
+variables:
+  - name: baseUrl
+    value: usebruno.com

@@ -24,6 +24,7 @@ runtime:
       code: |-
         const tokenValue = 'tokenRuntime';
         bru.setVar('tokenVar',tokenValue);
+        bru.setVar(key,value)
 
 settings:
   encodeUrl: true

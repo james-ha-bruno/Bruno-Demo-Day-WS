@@ -1,7 +1,7 @@
 info:
   name: Validate Pet Vaccine - External Libraries
   type: http
-  seq: 7
+  seq: 6
 
 http:
   method: POST

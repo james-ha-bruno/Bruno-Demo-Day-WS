@@ -7,7 +7,7 @@ info:
 
 http:
   method: GET
-  url: https://newsapi.org/v2/everything?q=tesla&sortBy=publishedAt&from=2025-10-01
+  url: https://newsapi.org/v2/everything?q=tesla&sortBy=publishedAt&from={{validDate}}
   params:
     - name: q
       value: tesla
@@ -18,14 +18,14 @@ http:
     - name: from
       value: "{{validDate}}"
       type: query
-      disabled: true
     - name: from
       value: 2025-10-01
       type: query
+      disabled: true
   auth:
     type: apikey
     key: apiKey
-    value: "{{$secrets.demoKeys.news-api-key}}"
+    value: "{{$secrets.azure-keys.news-api-key}}"
     placement: query
 
 runtime:
