@@ -7,7 +7,7 @@ info:
 
 http:
   method: POST
-  url: https://reqres.in/api/users
+  url: https://echo.usebruno.com
   body:
     type: json
     data: |-
@@ -15,7 +15,6 @@ http:
           "name": "{{name}}",
           "job": "{{job}}"
       }
-  auth: inherit
 
 runtime:
   scripts:
@@ -40,7 +39,7 @@ runtime:
   assertions:
     - expression: res.status
       operator: eq
-      value: "201"
+      value: "200"
     - expression: res.body.name
       operator: isString
 
