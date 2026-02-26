@@ -1,5 +1,5 @@
 name: Demo-Env
-color: "#B83D7F"
+color: "#6dd0cb"
 variables:
   - name: username
     value: jamesd
