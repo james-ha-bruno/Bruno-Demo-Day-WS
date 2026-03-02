@@ -14,9 +14,13 @@ collections:
     path: "collections/Zscaler OneAPI"
   - name: "Zscaler OneAPI - 1"
     path: "collections/Zscaler OneAPI - 1"
+  - name: "GitHub REST API"
+    path: "collections/github-rest-api-collection"
 
 specs:
   - name: "swagger-petstore"
     path: "../demo-assets/swagger-petstore.json"
 
 docs: ''
+
+activeEnvironmentUid: 159unet00000000000000
