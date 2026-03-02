@@ -10,7 +10,7 @@ http:
   url: https://dogapi.dog/api/v2/facts
   params:
     - name: max_length
-      value: ""
+      value: "100"
       type: query
       disabled: true
   auth: inherit
