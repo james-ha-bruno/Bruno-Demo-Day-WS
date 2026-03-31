@@ -18,7 +18,4 @@ variables:
   - secret: true
     name: news-api-key
   - secret: true
-    name: baseUrl
-    disabled: true
-  - secret: true
     name: reqres-api-key
