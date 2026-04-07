@@ -1,13 +1,13 @@
 info:
   name: Get News Articles
   type: http
-  seq: 2
+  seq: 1
   tags:
     - demo
 
 http:
   method: GET
-  url: https://newsapi.org/v2/everything?q=tesla&sortBy=publishedAt&from={{validDate}}
+  url: https://newsapi.org/v2/everything?q=tesla&sortBy=publishedAt&from=12345
   params:
     - name: q
       value: tesla
@@ -16,7 +16,7 @@ http:
       value: publishedAt
       type: query
     - name: from
-      value: "{{validDate}}"
+      value: "12345"
       type: query
     - name: from
       value: 2025-10-01
