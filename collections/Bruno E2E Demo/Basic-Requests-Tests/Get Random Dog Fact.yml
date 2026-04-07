@@ -20,7 +20,7 @@ runtime:
     - type: after-response
       code: |-
         const responseUrl = res.getUrl();
-        console.log("Response URL:", responseUrl);
+        console.log("Response URL: ", responseUrl);
     - type: tests
       code: |-
         const body = res.getBody();
