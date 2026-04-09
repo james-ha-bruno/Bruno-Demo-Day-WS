@@ -1,0 +1,40 @@
+name: Sportmonks API V3
+variables:
+  - name: version
+    value: v3
+  - name: api_token
+    value: ""
+  - name: base_url
+    value: https://api.sportmonks.com
+  - name: sport
+    value: football
+  - name: date
+    value: 2022-05-17
+  - name: fixture_id
+    value: "18461662"
+  - name: start_date
+    value: 2022-05-15
+  - name: end_date
+    value: 2022-05-17
+  - name: team_id
+    value: "1"
+  - name: first_team
+    value: "1"
+  - name: second_team
+    value: "2"
+  - name: season_id
+    value: "18378"
+  - name: round_id
+    value: "7038"
+  - name: player_id
+    value: "1"
+  - name: country_id
+    value: "2"
+  - name: coach_id
+    value: "2"
+  - name: stage_id
+    value: "2"
+  - name: referee_id
+    value: "3"
+  - name: league_id
+    value: "2"
