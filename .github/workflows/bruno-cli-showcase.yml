@@ -56,7 +56,7 @@ on:
 
 jobs:
   run-collection:
-    name: bru run – ${{ inputs.environment }}${{ inputs.folder != '' && format(' / {0}', inputs.folder) || '' }}
+    name: "bru run - ${{ inputs.environment }}${{ inputs.folder != '' && format(' / {0}', inputs.folder) || '' }}"
     runs-on: ubuntu-latest
 
     steps:
@@ -71,53 +71,48 @@ jobs:
       - name: Install Bruno CLI
         run: npm install -g @usebruno/cli
 
-      - name: Build bru run command
-        id: build-cmd
-        shell: bash
-        run: |
-          CMD="bru run"
-
-          # Folder (optional)
-          if [ -n "${{ inputs.folder }}" ]; then
-            CMD="$CMD \"${{ inputs.folder }}\""
-          fi
-
-          # Environment
-          CMD="$CMD --env ${{ inputs.environment }}"
-
-          # Tag filters
-          if [ -n "${{ inputs.tags }}" ]; then
-            CMD="$CMD --tags ${{ inputs.tags }}"
-          fi
-          if [ -n "${{ inputs.exclude_tags }}" ]; then
-            CMD="$CMD --exclude-tags ${{ inputs.exclude_tags }}"
-          fi
-
-          # Flags
-          if [ "${{ inputs.tests_only }}" = "true" ]; then
-            CMD="$CMD --tests-only"
-          fi
-          if [ "${{ inputs.bail }}" = "true" ]; then
-            CMD="$CMD --bail"
-          fi
-
-          # Data-driven CSV (only meaningful for 05-Data-Driven)
-          if [ "${{ inputs.data_driven }}" = "true" ]; then
-            CMD="$CMD --csv-file-path \"05-Data-Driven/users.csv\""
-          fi
-
-          # Reporters
-          CMD="$CMD --reporter-json results.json --reporter-junit results.xml --reporter-html results.html"
-
-          echo "cmd=$CMD" >> "$GITHUB_OUTPUT"
-          echo "### bru run command" >> "$GITHUB_STEP_SUMMARY"
-          echo '```bash' >> "$GITHUB_STEP_SUMMARY"
-          echo "$CMD" >> "$GITHUB_STEP_SUMMARY"
-          echo '```' >> "$GITHUB_STEP_SUMMARY"
-
       - name: Run Bruno collection
         working-directory: ./collections/Bruno CLI Showcase
-        run: ${{ steps.build-cmd.outputs.cmd }}
+        shell: bash
+        env:
+          # -- Map workflow inputs to readable variable names ----------------
+          BRU_FOLDER:       ${{ inputs.folder }}
+          BRU_ENV:          ${{ inputs.environment }}
+          BRU_TAGS:         ${{ inputs.tags }}
+          BRU_EXCLUDE_TAGS: ${{ inputs.exclude_tags }}
+          BRU_TESTS_ONLY:   ${{ inputs.tests_only }}
+          BRU_BAIL:         ${{ inputs.bail }}
+          BRU_DATA_DRIVEN:  ${{ inputs.data_driven }}
+        run: |
+          args=()
+
+          # Target folder  (omit to run the whole collection)
+          [[ -n "$BRU_FOLDER"       ]] && args+=("$BRU_FOLDER")
+
+          # Environment
+          args+=(--env "$BRU_ENV")
+
+          # Tag filters
+          [[ -n "$BRU_TAGS"         ]] && args+=(--tags         "$BRU_TAGS")
+          [[ -n "$BRU_EXCLUDE_TAGS" ]] && args+=(--exclude-tags "$BRU_EXCLUDE_TAGS")
+
+          # Flags
+          [[ "$BRU_TESTS_ONLY" == true ]] && args+=(--tests-only)
+          [[ "$BRU_BAIL"       == true ]] && args+=(--bail)
+
+          # Data-driven CSV
+          [[ "$BRU_DATA_DRIVEN" == true ]] && args+=(--csv-file-path "05-Data-Driven/users.csv")
+
+          # Reporters
+          args+=(--reporter-json  results.json)
+          args+=(--reporter-junit results.xml)
+          args+=(--reporter-html  results.html)
+
+          # Print the resolved command to the Job Summary before running
+          echo "### bru run command" >> "$GITHUB_STEP_SUMMARY"
+          printf 'bru run %s\n' "${args[*]}" >> "$GITHUB_STEP_SUMMARY"
+
+          bru run "${args[@]}"
 
       - name: Upload test reports
         if: always()
