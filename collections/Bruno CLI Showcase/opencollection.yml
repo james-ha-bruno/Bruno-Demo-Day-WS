@@ -1,0 +1,51 @@
+opencollection: 1.0.0
+
+info:
+  name: Bruno CLI Showcase
+
+docs:
+  content: |-
+    # Bruno CLI Showcase Collection
+
+    This collection demonstrates the key capabilities of the **Bruno CLI** (`bru run`).
+    Every folder targets a specific CLI feature with ready-to-copy commands.
+
+    ---
+
+    ## 🚀 Quick-start Commands
+
+    ```bash
+    # Run the entire collection against the Production environment
+    bru run --env Production
+
+    # Run a single folder
+    bru run "01-Basic-Requests" --env Production
+
+    # Multi-reporter output (JSON + HTML + JUnit)
+    bru run --env Production \
+      --reporter-json reports/results.json \
+      --reporter-html reports/results.html \
+      --reporter-junit reports/results.xml
+
+    # Override an env variable inline
+    bru run --env Production --env-var baseUrl=https://jsonplaceholder.typicode.com
+
+    # Only run requests that have tests
+    bru run --env Production --tests-only
+
+    # Stop on the first failure
+    bru run --env Production --bail
+
+    # Data-driven run with a CSV file
+    bru run "05-Data-Driven" --env Production \
+      --csv-file-path "05-Data-Driven/users.csv"
+
+    # Filter by tag
+    bru run --env Production --tags smoke
+    bru run --env Production --tags regression
+    bru run --env Production --exclude-tags slow
+    ```
+  type: text/markdown
+
+bundled: false
+extensions: {}

@@ -1,0 +1,19 @@
+info:
+  name: 03-Scripting
+  type: folder
+  seq: 3
+
+docs:
+  content: |-
+    ## 03 – Scripting
+
+    Demonstrates Bruno's `before-request` and `after-response` scripting hooks.
+
+    - **Dynamic Date Header** – a `before-request` script builds a date-range and injects it as a variable.
+    - **Response Transformation** – an `after-response` script reshapes the JSON payload and logs a summary.
+    - **Conditional Next Request** – shows `bru.setNextRequest()` to control flow at runtime.
+
+    ```bash
+    bru run "03-Scripting" --env Production
+    ```
+  type: text/markdown

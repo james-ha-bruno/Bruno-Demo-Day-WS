@@ -14,6 +14,8 @@ collections:
     path: "collections/Zscaler OneAPI"
   - name: "Zscaler OneAPI - 1"
     path: "collections/Zscaler OneAPI - 1"
+  - name: "Bruno CLI Showcase"
+    path: "collections/Bruno CLI Showcase"
 
 specs:
   - name: "swagger-petstore"
