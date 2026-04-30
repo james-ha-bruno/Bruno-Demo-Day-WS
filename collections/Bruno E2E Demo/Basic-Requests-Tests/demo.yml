@@ -10,9 +10,9 @@ http:
     type: form-urlencoded
     data:
       - name: username
-        value: johndoe
+        value: bruno
       - name: password
-        value: secret123
+        value: pword12345
   auth:
     type: apikey
     key: x-api-key
