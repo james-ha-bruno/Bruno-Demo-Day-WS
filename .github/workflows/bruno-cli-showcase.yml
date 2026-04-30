@@ -48,6 +48,16 @@ on:
         default: false
         type: boolean
 
+      global_env:
+        description: 'Global environment name (workspace-level vars shared across collections, e.g. Globals)'
+        required: false
+        default: ''
+
+      env_vars:
+        description: 'Override env variables (comma-separated key=value pairs, e.g. postId=42,userId=7)'
+        required: false
+        default: ''
+
       data_driven:
         description: Use CSV file for data-driven run (05-Data-Driven folder only)
         required: false
@@ -78,10 +88,12 @@ jobs:
           # -- Map workflow inputs to readable variable names ----------------
           BRU_FOLDER:       ${{ inputs.folder }}
           BRU_ENV:          ${{ inputs.environment }}
+          BRU_GLOBAL_ENV:   ${{ inputs.global_env }}
           BRU_TAGS:         ${{ inputs.tags }}
           BRU_EXCLUDE_TAGS: ${{ inputs.exclude_tags }}
           BRU_TESTS_ONLY:   ${{ inputs.tests_only }}
           BRU_BAIL:         ${{ inputs.bail }}
+          BRU_ENV_VARS:     ${{ inputs.env_vars }}
           BRU_DATA_DRIVEN:  ${{ inputs.data_driven }}
         run: |
           args=()
@@ -91,6 +103,17 @@ jobs:
 
           # Environment
           args+=(--env "$BRU_ENV")
+
+          # Global environment (workspace-level)
+          [[ -n "$BRU_GLOBAL_ENV" ]] && args+=(--global-env "$BRU_GLOBAL_ENV")
+
+          # Environment variable overrides (--env-var, repeatable)
+          if [[ -n "$BRU_ENV_VARS" ]]; then
+            IFS=',' read -ra _VAR_PAIRS <<< "$BRU_ENV_VARS"
+            for _pair in "${_VAR_PAIRS[@]}"; do
+              args+=(--env-var "$_pair")
+            done
+          fi
 
           # Tag filters
           [[ -n "$BRU_TAGS"         ]] && args+=(--tags         "$BRU_TAGS")

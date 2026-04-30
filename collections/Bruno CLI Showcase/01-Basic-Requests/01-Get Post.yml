@@ -9,10 +9,14 @@ info:
 http:
   method: GET
   url: "{{baseUrl}}/posts/{{postId}}"
-  auth: none
+  auth: inherit
 
 runtime:
   scripts:
+    - type: after-response
+      code: |-
+        const globalVar = bru.getGlobalEnvVar('apiVersion');
+        console.log('apiV: ' + globalVar);
     - type: tests
       code: |-
         const body = res.getBody();

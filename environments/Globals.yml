@@ -4,5 +4,5 @@ variables:
     value: usebruno.com
   - name: auto
     value: ""
-  - name: autoSaveOIncauseeseirness
+  - name: apiVersion
     value: ""

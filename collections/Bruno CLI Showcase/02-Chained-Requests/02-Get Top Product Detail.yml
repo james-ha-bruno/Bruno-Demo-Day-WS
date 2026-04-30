@@ -9,7 +9,7 @@ info:
 http:
   method: GET
   url: "{{dummyUrl}}/products/{{topProductId}}"
-  auth: none
+  auth: inherit
 
 runtime:
   scripts:

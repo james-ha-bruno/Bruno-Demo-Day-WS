@@ -13,3 +13,5 @@ variables:
     value: "1"
   - name: userId
     value: "1"
+  - name: releaseStage
+    value: production

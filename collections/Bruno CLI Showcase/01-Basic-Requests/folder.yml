@@ -14,7 +14,20 @@ docs:
     # Run just this folder with an environment
     bru run "01-Basic-Requests" --env Production
 
-    # Run with inline variable override
-    bru run "01-Basic-Requests" --env Production --env-var baseUrl=https://jsonplaceholder.typicode.com
+    # Override a single env variable (e.g. fetch post #42 instead of the default)
+    bru run "01-Basic-Requests" --env Production --env-var postId=42
+
+    # Override multiple env variables in one command (stack --env-var for each)
+    bru run "01-Basic-Requests" --env Production --env-var postId=42 --env-var userId=7
+
+    # Override a collection-level environment variable
+    bru run "01-Basic-Requests" --env Production --env-var baseUrl=https://staging.example.com
+
+    # Load the default workspace global env (releaseStage=production, apiVersion=3)
+    bru run "01-Basic-Requests" --env Production --global-env Globals
+
+    # Override global env vars by pointing --global-env at a different global env file
+    # (releaseStage=staging, apiVersion=v2, debugMode=true)
+    bru run "01-Basic-Requests" --env Production --global-env Globals-Staging
     ```
   type: text/markdown

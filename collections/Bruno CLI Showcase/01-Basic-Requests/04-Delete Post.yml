@@ -8,7 +8,7 @@ info:
 http:
   method: DELETE
   url: "{{baseUrl}}/posts/{{postId}}"
-  auth: none
+  auth: inherit
 
 runtime:
   scripts:

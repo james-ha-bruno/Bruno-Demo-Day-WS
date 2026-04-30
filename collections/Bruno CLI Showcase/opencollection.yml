@@ -2,6 +2,17 @@ opencollection: 1.0.0
 
 info:
   name: Bruno CLI Showcase
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
 
 docs:
   content: |-
@@ -27,8 +38,20 @@ docs:
       --reporter-html reports/results.html \
       --reporter-junit reports/results.xml
 
-    # Override an env variable inline
-    bru run --env Production --env-var baseUrl=https://jsonplaceholder.typicode.com
+    # Override a single environment variable inline
+    bru run --env Production --env-var postId=42
+
+    # Override multiple environment variables (stack --env-var for each)
+    bru run --env Production --env-var postId=42 --env-var userId=7
+
+    # Override a variable defined in the collection environment
+    bru run --env Production --env-var baseUrl=https://staging.example.com
+
+    # Use the workspace-level global environment (shared vars across all collections)
+    bru run --env Production --global-env Globals
+
+    # Override a global environment variable at runtime (--env-var applies on top)
+    bru run --env Production --global-env Globals --env-var apiVersion=v2
 
     # Only run requests that have tests
     bru run --env Production --tests-only
@@ -46,6 +69,5 @@ docs:
     bru run --env Production --exclude-tags slow
     ```
   type: text/markdown
-
 bundled: false
 extensions: {}
