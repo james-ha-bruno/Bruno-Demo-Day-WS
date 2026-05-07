@@ -1,0 +1,22 @@
+info:
+  name: Multiply
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: http://www.dneonline.com/calculator.asmx
+  headers:
+    - name: Content-Type
+      value: text/xml; charset=utf-8
+    - name: SOAPAction
+      value: http://tempuri.org/Multiply
+  body:
+    type: xml
+    data: <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><!-- Element Multiply not found --></soap:Body></soap:Envelope>
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,22 @@
+info:
+  name: Subtract
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://www.dneonline.com/calculator.asmx
+  headers:
+    - name: Content-Type
+      value: text/xml; charset=utf-8
+    - name: SOAPAction
+      value: http://tempuri.org/Subtract
+  body:
+    type: xml
+    data: <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><!-- Element Subtract not found --></soap:Body></soap:Envelope>
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
