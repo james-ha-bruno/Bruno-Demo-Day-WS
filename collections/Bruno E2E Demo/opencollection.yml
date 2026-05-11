@@ -18,7 +18,6 @@ request:
   variables:
     - name: tokenVar
       value: tokenCollection
-      disabled: true
   scripts:
     - type: before-request
       code: // console.log('Collection Level Script Logic')

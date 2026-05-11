@@ -7,18 +7,15 @@ variables:
     value: jamesdpass
   - name: env-ApiKey
     value: "{{process.env.apikey}}"
-  - name: companyVar
-    value: Bruno
-  - name: nameVar
-    value: James Ha
+  - secret: true
+    name: companyVar
+  - secret: true
+    name: nameVar
   - name: tokenVar
     value: tokenEnvironment
   - secret: true
     name: mongodb
   - secret: true
     name: news-api-key
-  - secret: true
-    name: baseUrl
-    disabled: true
   - secret: true
     name: reqres-api-key

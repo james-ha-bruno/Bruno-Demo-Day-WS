@@ -20,7 +20,14 @@ runtime:
     - type: after-response
       code: |-
         const responseUrl = res.getUrl();
-        console.log("Response URL:", responseUrl);
+        console.log("Response URL: ", responseUrl);
+
+        const dogFactRes = res.getBody();
+
+        if (dogFactRes.data[0].type == "fact")
+        {
+          console.log("Facts are fun!");
+        }
     - type: tests
       code: |-
         const body = res.getBody();
