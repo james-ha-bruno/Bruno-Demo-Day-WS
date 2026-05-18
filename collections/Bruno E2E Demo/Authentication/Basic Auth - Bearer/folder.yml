@@ -4,4 +4,13 @@ info:
   seq: 1
 
 request:
-  auth: inherit
+  auth:
+    type: oauth2
+    flow: authorization_code
+    credentials:
+      placement: body
+    tokenConfig:
+      id: credentials
+      placement:
+        header: Bearer
+      source: access_token

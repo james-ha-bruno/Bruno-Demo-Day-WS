@@ -22,12 +22,5 @@ request:
   scripts:
     - type: before-request
       code: // console.log('Collection Level Script Logic')
-
-docs:
-  content: |-
-    ### Markdown Docs
-    - 
-    - 
-  type: text/markdown
 bundled: false
 extensions: {}

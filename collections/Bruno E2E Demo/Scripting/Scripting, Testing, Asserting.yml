@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: https://newsapi.org/v2/everything?q=nvidia&sortBy=publishedAt&from=2025-09-01
+  url: https://newsapi.org/v2/everything?q=nvidia&sortBy=publishedAt&from={{validDate}}
   params:
     - name: q
       value: nvidia
@@ -16,10 +16,10 @@ http:
     - name: from
       value: "{{validDate}}"
       type: query
-      disabled: true
     - name: from
       value: 2025-09-01
       type: query
+      disabled: true
   auth:
     type: apikey
     key: apiKey
@@ -48,7 +48,8 @@ runtime:
     - type: after-response
       code: |-
         test("returns 200 OK", () => {
-          expect(res.status).to.equal(200);
+          expect(res.status).to.equal(201);
+          
         });
     - type: tests
       code: |-
@@ -70,13 +71,10 @@ runtime:
     - expression: res.status
       operator: eq
       value: "200"
-      disabled: true
     - expression: res.body.totalResults
       operator: isNumber
-      disabled: true
     - expression: res.body
       operator: isJson
-      disabled: true
 
 settings:
   encodeUrl: true

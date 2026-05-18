@@ -1,0 +1,38 @@
+info:
+  name: get series
+  type: http
+  seq: 7
+
+http:
+  method: GET
+  url: https://orthanc.uclouvain.be/demo/dicom-web/studies/1.2.840.113619.2.176.2025.1499492.7391.1171285944.390/series
+  headers:
+    - name: Accept
+      value: application/dicom+json
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const body = res.getBody();
+
+        const data = (typeof body === "string") ? JSON.parse(body) : body;
+
+        const studyUid = "1.2.840.113619.2.176.2025.1499492.7391.1171285944.390";
+
+        const seriesUid = data[0]["0020000E"].Value[0];
+
+        bru.setVar("series_uid", seriesUid);
+
+        console.log(
+
+          `https://orthanc.uclouvain.be/demo/dicom-web/studies/${studyUid}/series/${seriesUid}/instances`
+
+        );
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
