@@ -22,6 +22,7 @@ jobs:
       - name: Run API Tests
         run: |
           docker run --rm \
+            --user root \
             -v "${{ github.workspace }}/collections/Bruno E2E Demo:/bruno" \
             usebruno/cli:latest \
             run "Product Update Flow" --env Demo-Env \
