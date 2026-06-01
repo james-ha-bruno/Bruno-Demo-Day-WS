@@ -1,0 +1,34 @@
+# Same as main.yml but runs Bruno CLI via the official Docker image
+# instead of installing it with npm.
+name: CI (Docker)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run a one-line script
+        run: echo GHA Pipeline Execution - Build and Test the repo
+
+      - name: Run API Tests
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}/collections/Bruno E2E Demo:/bruno" \
+            usebruno/cli:latest \
+            run "Product Update Flow" --env Demo-Env \
+            --reporter-html results.html --sandbox=developer
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: "./collections/Bruno E2E Demo/results.html"
