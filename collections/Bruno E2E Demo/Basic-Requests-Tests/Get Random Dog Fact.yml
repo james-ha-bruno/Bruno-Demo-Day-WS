@@ -18,9 +18,7 @@ http:
 runtime:
   scripts:
     - type: after-response
-      code: |-
-        const responseUrl = res.getUrl();
-        console.log("Response URL:", responseUrl);
+      code: const responseUrl = res.getUrl();
     - type: tests
       code: |-
         const body = res.getBody();
