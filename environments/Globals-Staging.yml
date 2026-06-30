@@ -4,5 +4,3 @@ variables:
     value: v2
   - name: releaseStage
     value: staging
-  - name: debugMode
-    value: "true"
