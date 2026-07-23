@@ -1,5 +1,5 @@
 name: Demo-Env
-color: "#6dd0cb"
+color: "#b9c88c"
 variables:
   - name: username
     value: jamesd
@@ -17,8 +17,5 @@ variables:
     name: mongodb
   - secret: true
     name: news-api-key
-  - secret: true
-    name: baseUrl
-    disabled: true
   - secret: true
     name: reqres-api-key
