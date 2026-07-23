@@ -7,10 +7,10 @@ info:
 
 http:
   method: GET
-  url: https://dogapi.dog/api/v2/facts?max_length=
+  url: https://dogapi.dog/api/v2/facts?max_length=1234
   params:
     - name: max_length
-      value: ""
+      value: "1234"
       type: query
   auth: inherit
 
