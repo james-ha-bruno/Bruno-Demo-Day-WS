@@ -16,6 +16,8 @@ collections:
     path: "collections/Zscaler OneAPI - 1"
   - name: "Bruno CLI Showcase"
     path: "collections/Bruno CLI Showcase"
+  - name: "PingOne Platform API - 2"
+    path: "collections/PingOne Platform API - 2"
 
 specs:
   - name: "swagger-petstore"
